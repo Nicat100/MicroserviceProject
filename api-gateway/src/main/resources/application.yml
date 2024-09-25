@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: api-gateway
+
+  cloud:
+    gateway:
+      routes:
+        - id: ms-order
+          uri: lb://MS-ORDER
+          predicates:
+            - Path=/v1/orders/**
+
+        - id: ms-product
+          uri: lb://MS-PRODUCT
+          predicates:
+            - Path=/api/v1/products/**
+
+        - id: ms-payment
+          uri: lb://MS-PAYMENT
+          predicates:
+            - Path=/v1/payments/**
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+server:
+  port: 9999
